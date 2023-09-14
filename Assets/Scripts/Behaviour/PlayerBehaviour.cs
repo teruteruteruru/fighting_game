@@ -28,6 +28,10 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _SpriteRenderer = null;
 
+    /// <summary> 弾のプレハブ() </summary>
+	[SerializeField]
+    private GameObject _BulletPrefab = null;
+
     //移動速度
     [SerializeField]
     float _MoveSpeed = 6.0f;
@@ -35,6 +39,10 @@ public class PlayerBehaviour : MonoBehaviour
     // ジャンプの初速
     [SerializeField]
     float _JumpSpeed = 17.0f;
+
+    //弾の速度
+    [SerializeField]
+    float _BulletSpeed = 10.0f;
 
     #endregion
 
@@ -166,6 +174,10 @@ public class PlayerBehaviour : MonoBehaviour
                     // ジャンプする処理
                     if (_Rigidbody != null)
                         Jump();
+
+                    // 撃つ処理
+                    if (_BulletPrefab != null)
+                        Shot();
                 }
                 break;
             case STATE_ENUM.Dead:
@@ -226,6 +238,24 @@ public class PlayerBehaviour : MonoBehaviour
             var v = _Rigidbody.velocity;
             v.y = _JumpSpeed;
             _Rigidbody.velocity = v;
+        }
+    }
+
+    /// <summary>
+	/// 撃つ処理
+	/// </summary>
+	private void Shot()
+    {
+        // スペースキーを押した事を検知する
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //弾生成
+            GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
+
+            //弾の初速設定
+            bulletObject.GetComponent<Rigidbody2D>().velocity = Vector2.left * _BulletSpeed;
+
+
         }
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7071575005954556808}
   - component: {fileID: 7071575005954556809}
   - component: {fileID: 7071575005954556813}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,8 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Rigidbody: {fileID: 7071575005954556809}
   _SpriteRenderer: {fileID: 7071575005954556815}
+  _BulletPrefab: {fileID: 7572537589098237023, guid: 617019f06929cd549a8adc4588082b6d, type: 3}
   _MoveSpeed: 6
   _JumpSpeed: 10
+  _BulletSpeed: 10
 --- !u!50 &7071575005954556809
 Rigidbody2D:
   serializedVersion: 4
