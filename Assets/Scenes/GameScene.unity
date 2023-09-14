@@ -338,6 +338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGrid
       objectReference: {fileID: 0}
+    - target: {fileID: 3205376316947539305, guid: 4cf210ea7591f6844b8d2941150ad6aa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3205376316947539306, guid: 4cf210ea7591f6844b8d2941150ad6aa, type: 3}
       propertyPath: m_RootOrder
       value: 2
