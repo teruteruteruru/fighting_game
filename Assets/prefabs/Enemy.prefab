@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942a617d3fd6c254499e20186b7f7e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RigidBody: {fileID: 0}
-  _SpriteRenderer: {fileID: 0}
+  _RigidBody: {fileID: 2191307641446137783}
+  _SpriteRenderer: {fileID: 9158836541995279993}
   _MoveSpeed: 3
   _GoLeft: 1
