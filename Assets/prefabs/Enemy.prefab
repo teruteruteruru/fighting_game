@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2191307641446137783}
   - component: {fileID: 3676341400025139249}
   - component: {fileID: 6460787955814857371}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,5 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _RigidBody: {fileID: 2191307641446137783}
   _SpriteRenderer: {fileID: 9158836541995279993}
+  <_Hp>k__BackingField: 5
   _MoveSpeed: 3
   _GoLeft: 1
