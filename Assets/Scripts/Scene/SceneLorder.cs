@@ -15,7 +15,14 @@ public class SceneLorder : MonoBehaviour
     #endregion
 
     #region field
-    
+
+    private GameObject player_obj;
+    private GameObject enemy_obj;
+    private bool player_is_dead;
+    private bool enemy_is_dead;
+    private PlayerBehaviour player_script;
+    private EnemyBehaviour enemy_script;
+
     #endregion
 
     #region property
@@ -24,8 +31,15 @@ public class SceneLorder : MonoBehaviour
 
     #region Unity function
 
-   
-   
+    private void Start()
+    {
+        player_obj = GameObject.Find("Player"); //Playerっていうオブジェクトを探す
+        player_script = obj.GetComponent<PlayerBehaviour>(); //付いているスクリプトを取得
+
+        enemy_obj = GameObject.Find("Enemy"); //Playerっていうオブジェクトを探す
+        enemy_script = obj.GetComponent<EnemyBehaviour>(); //付いているスクリプトを取得
+    }
+
     public void SceneLorderStart()
     {
         /// <summary>
@@ -71,6 +85,41 @@ public class SceneLorder : MonoBehaviour
     #endregion
 
     #region private function
+
+    private void Enemy_Dead()
+    {
+        /// <summary>
+        /// ボスが死んだ時の処理
+        /// </summary>
+
+        if (enemy_is_dead == true)
+        {
+
+            SceneLorderResult();
+
+        }
+
+    }
+
+    private void player_Dead()
+    {
+        /// <summary>
+        /// ボスが死んだ時の処理
+        /// </summary>
+
+        if (player_is_dead == true)
+        {
+
+            SceneLorderResult();
+
+        }
+
+    }
+
+    private void get_state()
+    {
+        
+    }
 
     #endregion
 
