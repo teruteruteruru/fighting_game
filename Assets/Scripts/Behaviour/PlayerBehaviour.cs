@@ -249,16 +249,9 @@ public class PlayerBehaviour : MonoBehaviour
         // スペースキーを押した事を検知する
         if (Input.GetMouseButtonDown(0))
         {
+            //自機からマウス位置へのベクトル
             Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-           ;
-            float rad = Mathf.Atan2(def.x, def.y);
-            float angle = rad * Mathf.Rad2Deg;
-            Quaternion quaternion = Quaternion.Euler(0, angle, 0);
-
-            Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
-
-            //Vector2 bulletDef = def.normalized
-
+           
             //弾生成
             GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
 
