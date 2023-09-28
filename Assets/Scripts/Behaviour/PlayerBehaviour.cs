@@ -247,13 +247,23 @@ public class PlayerBehaviour : MonoBehaviour
 	private void Shot()
     {
         // スペースキーを押した事を検知する
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
+            Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+           ;
+            float rad = Mathf.Atan2(def.x, def.y);
+            float angle = rad * Mathf.Rad2Deg;
+            Quaternion quaternion = Quaternion.Euler(0, angle, 0);
+
+            Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
+
+            //Vector2 bulletDef = def.normalized
+
             //弾生成
             GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
 
             //弾の初速設定
-            bulletObject.GetComponent<Rigidbody2D>().velocity = Vector2.left * _BulletSpeed;
+            bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed;
 
 
         }
