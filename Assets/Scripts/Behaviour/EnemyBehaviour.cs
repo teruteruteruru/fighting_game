@@ -35,6 +35,9 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField, Header("指定した画像を描画させる")]
     private SpriteRenderer _SpriteRenderer = null;
 
+    [field: SerializeField, Header("Hp")]
+    public int _Hp {get; private set;} = 5;
+
     [SerializeField, Header("移動速度")]
     float _MoveSpeed = 3.0f;
     // [SeriaizeField, Header("ジャンプ")]
@@ -120,6 +123,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     // 描画させる
                     _SpriteRenderer.enabled = true;
+                    ChangeState(STATE_ENUM.Move);
                 }
                 break;
             case STATE_ENUM.Move:
@@ -158,7 +162,6 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
         }
     }
-    #endregion
 
     private void Move()
     {
@@ -174,4 +177,5 @@ public class EnemyBehaviour : MonoBehaviour
             _RigidBody.velocity = v;        
         }
     }
+    #endregion
 }
