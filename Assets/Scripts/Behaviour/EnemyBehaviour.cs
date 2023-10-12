@@ -96,6 +96,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Log.Info(GetType(), "プレイヤーと接触した！");
         }
+
+        if(collision.gameObject.tag == "Bullet")
+        {
+            _Hp -= 1;
+        }
     }
     #endregion
 
@@ -173,7 +178,7 @@ public class EnemyBehaviour : MonoBehaviour
                 xVector = -1;
             }
             var v = _RigidBody.velocity;
-            v.x = xVector * _MoveSpeed; // 指定した方向に進み続ける
+            //v.x = xVector * _MoveSpeed; // 指定した方向に進み続ける
             _RigidBody.velocity = v;
 
             if (_Hp <= 0)
