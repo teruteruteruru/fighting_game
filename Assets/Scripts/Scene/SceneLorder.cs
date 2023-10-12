@@ -15,7 +15,14 @@ public class SceneLorder : MonoBehaviour
     #endregion
 
     #region field
-    
+
+    private GameObject player_obj;
+    private GameObject enemy_obj;
+    private bool player_is_dead;
+    private bool enemy_is_dead;
+    private PlayerBehaviour player_script;
+    private EnemyBehaviour enemy_script;
+
     #endregion
 
     #region property
@@ -24,17 +31,34 @@ public class SceneLorder : MonoBehaviour
 
     #region Unity function
 
-   
-   
+    private void Start()
+    {
+        initilalization();
+    }
+
+
+    private void Update()
+    {
+        get_state();
+        enemy_Dead();
+        player_Dead();
+    }
+
+
+
+    #endregion
+
+    #region public function
+
     public void SceneLorderStart()
     {
         /// <summary>
         /// スタートシーンの呼び出し
         /// </summary>
-        
-    #if UNITY_EDITOR
+
+#if UNITY_EDITOR
 	    Debug.Log ("LordStartScene");
-    #endif
+#endif
 
         SceneManager.LoadScene("Scenes/StartScene");
     }
@@ -45,9 +69,9 @@ public class SceneLorder : MonoBehaviour
         /// </summary>
 
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
 	    Debug.Log ("LordGameScene");
-    #endif
+#endif
         SceneManager.LoadScene("Scenes/GameScene");
     }
 
@@ -57,20 +81,69 @@ public class SceneLorder : MonoBehaviour
         /// リザルトシーンの呼び出し
         /// </summary>
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
 	          Debug.Log ("LordResultScene");
-    #endif
+#endif
 
         SceneManager.LoadScene("Scenes/ResultScene");
     }
 
-    #endregion
-
-    #region public function
 
     #endregion
 
     #region private function
+
+    private void initilalization()
+    {
+        /// <summary>
+        /// 初期化してスクリプトを読み込む
+        /// </summary>
+
+        player_obj = GameObject.Find("Player"); //Playerっていうオブジェクトを探す
+        player_script = player_obj.GetComponent<PlayerBehaviour>(); //付いているスクリプトを取得
+
+        enemy_obj = GameObject.Find("Enemy"); //Playerっていうオブジェクトを探す
+        enemy_script = enemy_obj.GetComponent<EnemyBehaviour>(); //付いているスクリプトを取得
+
+    }
+
+    private void enemy_Dead()
+    {
+        /// <summary>
+        /// ボスが死んだ時の処理
+        /// </summary>
+
+        if (enemy_is_dead == true)
+        {
+
+            SceneLorderResult();
+
+        }
+
+    }
+
+    private void player_Dead()
+    {
+        /// <summary>
+        /// ボスが死んだ時の処理
+        /// </summary>
+
+        if (player_is_dead == true)
+        {
+
+            SceneLorderResult();
+
+        }
+
+    }
+
+    private void get_state()
+    {
+
+        player_is_dead = player_script.IsDead;
+        enemy_is_dead = enemy_script.IsDead;
+
+    }
 
     #endregion
 
