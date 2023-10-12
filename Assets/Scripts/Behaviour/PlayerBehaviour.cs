@@ -34,15 +34,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     //移動速度
     [SerializeField]
-    float _MoveSpeed = 6.0f;
+    private float _MoveSpeed = 6.0f;
 
     // ジャンプの初速
     [SerializeField]
-    float _JumpSpeed = 17.0f;
+    private float _JumpSpeed = 17.0f;
 
     //弾の速度
     [SerializeField]
-    float _BulletSpeed = 10.0f;
+    private float _BulletSpeed = 10.0f;
+
+    //体力
+    [SerializeField]
+    private int _Hp = 5;
 
     #endregion
 
@@ -63,6 +67,14 @@ public class PlayerBehaviour : MonoBehaviour
                 return true;
             else
                 return false;
+        }
+    }
+
+    public int Hp
+    {
+        get
+        {
+                return _Hp;
         }
     }
 
@@ -178,6 +190,17 @@ public class PlayerBehaviour : MonoBehaviour
                     // 撃つ処理
                     if (_BulletPrefab != null)
                         Shot();
+
+                    //志望判定
+                    if(_Hp <= 0)
+                    {
+                        // ログを出す
+                        Log.Info(GetType(), "プレイヤーの体力がなくなりました");
+
+                        // Dead状態に変更
+                        ChangeState(STATE_ENUM.Dead);
+                    }
+                       
                 }
                 break;
             case STATE_ENUM.Dead:
