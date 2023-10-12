@@ -174,7 +174,12 @@ public class EnemyBehaviour : MonoBehaviour
             }
             var v = _RigidBody.velocity;
             v.x = xVector * _MoveSpeed; // 指定した方向に進み続ける
-            _RigidBody.velocity = v;        
+            _RigidBody.velocity = v;
+
+            if (_Hp <= 0)
+            {
+                ChangeState(STATE_ENUM.Dead);
+            }
         }
     }
     #endregion
