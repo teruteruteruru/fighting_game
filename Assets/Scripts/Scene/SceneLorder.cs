@@ -139,7 +139,9 @@ public class SceneLorder : MonoBehaviour
 
     private void get_state()
     {
-
+        /// <summary>
+        /// プレイヤーとボスのステータス更新
+        /// </summary>
         player_is_dead = player_script.IsDead;
         enemy_is_dead = enemy_script.IsDead;
 
