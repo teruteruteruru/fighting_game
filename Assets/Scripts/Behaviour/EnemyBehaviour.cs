@@ -178,8 +178,17 @@ public class EnemyBehaviour : MonoBehaviour
                 xVector = -1;
             }
             var v = _RigidBody.velocity;
-            //v.x = xVector * _MoveSpeed; // 指定した方向に進み続ける
+            v.x = xVector * _MoveSpeed; // 指定した方向に進み続ける
             _RigidBody.velocity = v;
+
+            if(this.gameObject.transform.position.x < -10f)
+            {
+                _GoLeft = false;
+            }
+            else if(this.gameObject.transform.position.x > 10f)
+            {
+                _GoLeft = true;
+            }
 
             if (_Hp <= 0)
             {
