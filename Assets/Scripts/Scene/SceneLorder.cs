@@ -31,17 +31,18 @@ public class SceneLorder : MonoBehaviour
 
     #region Unity function
 
+    // Updateメソッドが呼ばれる前のフレームで呼ばれる処理
     private void Start()
     {
-        initilalization();
+        Initilalization();
     }
 
-
+    // 毎フレーム呼ばれる処理
     private void Update()
     {
-        get_state();
-        enemy_Dead();
-        player_Dead();
+        Get_state();
+        Enemy_Dead();
+        Player_Dead();
     }
 
 
@@ -93,7 +94,7 @@ public class SceneLorder : MonoBehaviour
 
     #region private function
 
-    private void initilalization()
+    private void Initilalization()
     {
         /// <summary>
         /// 初期化してスクリプトを読み込む
@@ -107,7 +108,7 @@ public class SceneLorder : MonoBehaviour
 
     }
 
-    private void enemy_Dead()
+    private void Enemy_Dead()
     {
         /// <summary>
         /// ボスが死んだ時の処理
@@ -122,7 +123,7 @@ public class SceneLorder : MonoBehaviour
 
     }
 
-    private void player_Dead()
+    private void Player_Dead()
     {
         /// <summary>
         /// ボスが死んだ時の処理
@@ -137,7 +138,7 @@ public class SceneLorder : MonoBehaviour
 
     }
 
-    private void get_state()
+    private void Get_state()
     {
         /// <summary>
         /// プレイヤーとボスのステータス更新

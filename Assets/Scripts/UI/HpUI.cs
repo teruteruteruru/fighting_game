@@ -30,10 +30,10 @@ public class HpUI : MonoBehaviour
 	[SerializeField, Header("ボスの体力をもってくる")]
 	private int enemy_HP = 5;
 
-	[SerializeField, Header("Playerの現在の体力")]
+	[SerializeField, Header("Playerの現在の表示体力")]
 	private int player_HP_now = 0;
 
-	[SerializeField, Header("ボスの現在の体力")]
+	[SerializeField, Header("ボスの現在の表示体力")]
 	private int enemy_HP_now = 0;
 
 	[SerializeField, Header("HPのゲームオブジェクト")]
@@ -66,7 +66,7 @@ public class HpUI : MonoBehaviour
 	// Updateメソッドが呼ばれる前のフレームで呼ばれる処理
 	private void Start()
 	{
-		initilalization();
+		Initilalization();
 		player_HP_now = player_HP;
 
 		enemy_HP_now = enemy_HP;
@@ -75,10 +75,11 @@ public class HpUI : MonoBehaviour
 		Start_HPUI(WHOSE.enemy, enemy_HP_pos);
 	}
 
+	// 毎フレーム呼ばれる処理
 	private void Update()
 	{
-		get_HP();
-		update_HP();
+		Get_HP();
+		Update_HP();
 
 
 	}
@@ -122,8 +123,11 @@ public class HpUI : MonoBehaviour
 
 
 	}
-	private void get_HP()
+	private void Get_HP()
 	{
+		/// <summary>
+		/// プレイヤーとエネミーのHPを取得している
+		/// </summary>
 		Debug.Log("get hp");
 		player_HP = player_script.Hp;
 		enemy_HP = enemy_script._Hp;
@@ -131,8 +135,12 @@ public class HpUI : MonoBehaviour
 		Debug.Log("enemy hp" + enemy_HP);
 	}
 
-	private void update_HP()
+	private void Update_HP()
 	{
+		/// <summary>
+		/// それぞれのスクリプトからとってきたHPに合わせて表示されてるHPを減らしてる。
+        /// who_HP_now: 現在表示されているHP
+		/// </summary>
 		while (player_HP_now > player_HP)
 		{
 			GameObject obj = GameObject.Find("player_HP" + player_HP_now);
@@ -150,7 +158,7 @@ public class HpUI : MonoBehaviour
 
 	}
 
-	private void initilalization()
+	private void Initilalization()
 	{
 		/// <summary>
 		/// 初期化してスクリプトを読み込む
