@@ -34,15 +34,13 @@ public class SceneLorder : MonoBehaviour
     // Updateメソッドが呼ばれる前のフレームで呼ばれる処理
     private void Start()
     {
-        Initilalization();
+       
     }
 
     // 毎フレーム呼ばれる処理
     private void Update()
     {
-        Get_state();
-        Enemy_Dead();
-        Player_Dead();
+        
     }
 
 
@@ -94,59 +92,7 @@ public class SceneLorder : MonoBehaviour
 
     #region private function
 
-    private void Initilalization()
-    {
-        /// <summary>
-        /// 初期化してスクリプトを読み込む
-        /// </summary>
-
-        player_obj = GameObject.Find("Player"); //Playerっていうオブジェクトを探す
-        player_script = player_obj.GetComponent<PlayerBehaviour>(); //付いているスクリプトを取得
-
-        enemy_obj = GameObject.Find("Enemy"); //Playerっていうオブジェクトを探す
-        enemy_script = enemy_obj.GetComponent<EnemyBehaviour>(); //付いているスクリプトを取得
-
-    }
-
-    private void Enemy_Dead()
-    {
-        /// <summary>
-        /// ボスが死んだ時の処理
-        /// </summary>
-
-        if (enemy_is_dead == true)
-        {
-
-            SceneLorderResult();
-
-        }
-
-    }
-
-    private void Player_Dead()
-    {
-        /// <summary>
-        /// ボスが死んだ時の処理
-        /// </summary>
-
-        if (player_is_dead == true)
-        {
-
-            SceneLorderResult();
-
-        }
-
-    }
-
-    private void Get_state()
-    {
-        /// <summary>
-        /// プレイヤーとボスのステータス更新
-        /// </summary>
-        player_is_dead = player_script.IsDead;
-        enemy_is_dead = enemy_script.IsDead;
-
-    }
+   
 
     #endregion
 
