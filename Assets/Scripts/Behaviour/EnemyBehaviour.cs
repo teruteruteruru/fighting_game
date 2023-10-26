@@ -92,9 +92,9 @@ public class EnemyBehaviour : MonoBehaviour
     /// <param name="collision">衝突</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.name == "Player")
         {
-            Log.Info(GetType(), "プレイヤーと接触した！");
+            _GoLeft = !_GoLeft;
         }
 
         if(collision.gameObject.tag == "Bullet")
