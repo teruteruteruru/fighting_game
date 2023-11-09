@@ -102,9 +102,11 @@ MonoBehaviour:
   _Rigidbody: {fileID: 7071575005954556809}
   _SpriteRenderer: {fileID: 7071575005954556815}
   _BulletPrefab: {fileID: 7572537589098237023, guid: 617019f06929cd549a8adc4588082b6d, type: 3}
+  _BulletSPrefab: {fileID: 7572537589098237023, guid: 638bed61bfcf6a9468d07077f7d339fd, type: 3}
   _MoveSpeed: 6
   _JumpSpeed: 10
   _BulletSpeed: 10
+  _Hp: 5
 --- !u!50 &7071575005954556809
 Rigidbody2D:
   serializedVersion: 4
