@@ -32,6 +32,10 @@ public class PlayerBehaviour : MonoBehaviour
 	[SerializeField]
     private GameObject _BulletPrefab = null;
 
+    /// <summary> ショットガン弾のプレハブ() </summary>
+	[SerializeField]
+    private GameObject _BulletSPrefab = null;
+
     //移動速度
     [SerializeField]
     private float _MoveSpeed = 6.0f;
@@ -188,7 +192,7 @@ public class PlayerBehaviour : MonoBehaviour
                         Jump();
 
                     // 撃つ処理
-                    if (_BulletPrefab != null)
+                    if (_BulletPrefab != null&& _BulletSPrefab != null)
                         Shot();
 
                     //志望判定
@@ -280,6 +284,20 @@ public class PlayerBehaviour : MonoBehaviour
 
             //弾の初速設定
             bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed;
+
+
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            //自機からマウス位置へのベクトル
+            Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+            //弾生成
+            GameObject bulletSObject = Instantiate(_BulletSPrefab, transform.position, transform.rotation);
+
+            //弾の初速設定
+            bulletSObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 0.8f;
 
 
         }
