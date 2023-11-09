@@ -25,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         Jump,
         Wait,
+        Shot,
     }
     #endregion
 
@@ -46,6 +47,14 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField, Header("どっちに移動するか")] 
     bool _GoLeft = true;
 
+    /// <summary> 弾のプレハブ() </summary>
+	[SerializeField]
+    private GameObject _BulletPrefab = null;
+
+    //弾の速度
+    [SerializeField]
+    private float _BulletSpeed = 10.0f;
+
     #endregion
 
     #region field
@@ -55,8 +64,10 @@ public class EnemyBehaviour : MonoBehaviour
     private STATE_ENUM _State = STATE_ENUM.None;
 
     /// <summary>
-    /// タスクリスト (要確認)
+    /// タスクの種類
     /// </summary>
+    private TASK_ENUM _Task = TASK_ENUM.Wait;
+
     #endregion
 
     #region property
@@ -145,6 +156,39 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     /// <summary>
+    /// タスクの変更
+    /// この関数で変更の管理をするため、_Taskの直接の変更はしない！
+    /// </summary>
+    /// <param name="next">次の状態</param>
+    private void ChangeTask(TASK_ENUM next)
+    {
+        var prev = _Task;
+        _Task = next;
+
+        Log.Info(GetType(), "Change State {0} -> {1}", prev, next);
+
+        // 変数が多い場合、条件分岐はswitchで書くと見やすい
+        switch (_Task)
+        {
+            case TASK_ENUM.Wait:
+                {
+
+                }
+                break;
+            case TASK_ENUM.Shot:
+                {
+                    Shot();
+                }
+                break;
+            case TASK_ENUM.Jump:
+                {
+                    
+                }
+                break;
+        }
+    }
+
+    /// <summary>
     /// 毎フレーム呼ばれる処理 (状態により変わる)
     /// </summary>
     private void UpdateState()
@@ -194,7 +238,32 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 ChangeState(STATE_ENUM.Dead);
             }
+
+            if(Random.value < 0.0002f)
+            {
+                ChangeTask(TASK_ENUM.Shot);
+            }
         }
+    }
+
+    /// <summary>
+	/// 撃つ処理
+	/// </summary>
+	private void Shot()
+    {
+        GameObject player_obj = GameObject.Find("Player"); //Playerっていうオブジェクトを探す
+
+        //自機からプレイヤー位置へのベクトル
+        Vector2 def = Camera.main.WorldToScreenPoint(player_obj.transform.position) - Camera.main.WorldToScreenPoint(this.transform.position);
+
+        //弾生成
+        GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
+
+        //弾の初速設定
+        bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed;
+
+        //タスクの変更
+        ChangeTask(TASK_ENUM.Wait);
     }
     #endregion
 }
