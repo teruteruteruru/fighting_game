@@ -114,8 +114,12 @@ public class PlayerBehaviour : MonoBehaviour
             // ログを出す
             Log.Info(GetType(), "プレイヤーがボスにあたりました");
 
-            // Dead状態に変更
-            ChangeState(STATE_ENUM.Dead);
+            _Hp = 0;
+        }
+
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            _Hp -= 1;
         }
     }
     #endregion
@@ -283,7 +287,7 @@ public class PlayerBehaviour : MonoBehaviour
             GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
 
             //弾の初速設定
-            bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed;
+            bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 0.3f;
 
 
         }
@@ -297,7 +301,7 @@ public class PlayerBehaviour : MonoBehaviour
             GameObject bulletSObject = Instantiate(_BulletSPrefab, transform.position, transform.rotation);
 
             //弾の初速設定
-            bulletSObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 0.8f;
+            bulletSObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 1f;
 
 
         }
