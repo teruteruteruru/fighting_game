@@ -48,9 +48,13 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _BulletSpeed = 10.0f;
 
+    
+
     //体力
     [SerializeField]
     private int _Hp = 5;
+
+    
 
     #endregion
 
@@ -59,6 +63,9 @@ public class PlayerBehaviour : MonoBehaviour
     /// プレイヤーの状態
     /// </summary>
     private STATE_ENUM _State = STATE_ENUM.None;
+
+
+    private GameTimer _BulletIntervalTimer = new GameTimer(1f);
     #endregion
 
     #region property
@@ -100,6 +107,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // 状態毎の処理を毎フレーム呼ぶ
         UpdateState();
+
+        _BulletIntervalTimer.UpdateTimer();
     }
 
     /// <summary>
@@ -114,7 +123,7 @@ public class PlayerBehaviour : MonoBehaviour
             // ログを出す
             Log.Info(GetType(), "プレイヤーがボスにあたりました");
 
-            _Hp = 0;
+            _Hp -= 2;
         }
 
         if (collision.gameObject.tag == "EnemyBullet")
@@ -277,33 +286,39 @@ public class PlayerBehaviour : MonoBehaviour
 	/// </summary>
 	private void Shot()
     {
-        // スペースキーを押した事を検知する
-        if (Input.GetMouseButtonDown(0))
+        if (_BulletIntervalTimer.IsTimeUp)
         {
-            //自機からマウス位置へのベクトル
-            Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-           
-            //弾生成
-            GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
 
-            //弾の初速設定
-            bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 0.3f;
+            // スペースキーを押した事を検知する
+            if (Input.GetMouseButtonDown(0))
+            {
+                //自機からマウス位置へのベクトル
+                Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
 
+                //弾生成
+                GameObject bulletObject = Instantiate(_BulletPrefab, transform.position, transform.rotation);
 
-        }
+                //弾の初速設定
+                bulletObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 0.3f;
+               
+                _BulletIntervalTimer.ResetTimer();
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            //自機からマウス位置へのベクトル
-            Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            }
 
-            //弾生成
-            GameObject bulletSObject = Instantiate(_BulletSPrefab, transform.position, transform.rotation);
+            if (Input.GetMouseButtonDown(1))
+            {
+                //自機からマウス位置へのベクトル
+                Vector2 def = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
 
-            //弾の初速設定
-            bulletSObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 1f;
+                //弾生成
+                GameObject bulletSObject = Instantiate(_BulletSPrefab, transform.position, transform.rotation);
 
+                //弾の初速設定
+                bulletSObject.GetComponent<Rigidbody2D>().velocity = def.normalized * _BulletSpeed * 1f;
+                
+                _BulletIntervalTimer.ResetTimer();
 
+            }
         }
     }
 
