@@ -22,7 +22,7 @@ public class BulletSBehaviour : BulletBehaviour
     #region Unity function
     private void Update()
     {
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject, 0.2f);
     }
     #endregion
 
